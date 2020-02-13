@@ -63,7 +63,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     @IBAction func uploadImage(_ sender: UIButton) {
-        let randomID = UUID.init().uuidString
+//        let randomID = UUID.init().uuidString
 //        let uploadRef = Storage.storage().reference(withPath: "images/\(randomID).jpg")
 //        guard let imageData = #imageLiteral(resourceName: "carbonaraPic").jpegData(compressionQuality: 0.75) else {return}
 //        let uploadMetaData = StorageMetadata.init()

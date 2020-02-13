@@ -12,22 +12,30 @@ import FirebaseStorage
 
 class RecipeContentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let generalInfoCellID = "GeneralInfoCell"
+    @IBOutlet weak var table: UITableView!
+    
+    let generalInfoCellID = "GeneralInfo"
     let tagsCellID = "TagCell"
     let ingredientsCellID = "IngredientsCellID"
+    let howToCellID = "HowToCellID"
     var ingredientsArray: [String] = []
     var ingredientsAmountArray: [String] = []
     var generalLabelText: String = ""
     var imageRefID: String = ""
-    let sectionZero
     
     var theRecipe: Recipe!
 //    var db: Firestore?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(theRecipe.howTo.count)
 //        db = Firestore.firestore()
         self.title = theRecipe?.title
+        table.delegate = self
+        table.dataSource = self
+        table.rowHeight = UITableView.automaticDimension
+        table.estimatedRowHeight = 44.0
+        self.table.reloadData()
 //        db?.collection("Recipes")
 //        var generalLabelText: String
         guard let authorTemp = theRecipe?.author else {return}
@@ -73,7 +81,7 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -83,14 +91,18 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
             return 1
         } else if section == 1 {
             return 1
-        } else {
+        } else if section == 2 {
             return theRecipe.ingredients.count
+        } else {
+            return theRecipe.howTo.count
         }
+//        let number = theRecipe.ingredients.count + 2
+//        return number
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: generalInfoCellID) as! GeneralInfoCell?
+            let cell = tableView.dequeueReusableCell(withIdentifier: generalInfoCellID) as! GeneralInfoCell
             let imageRefID = theRecipe.imageID
             //        print(imageRefID)
                 let storageRef = Storage.storage().reference(withPath: "images/\(imageRefID)")
@@ -100,21 +112,36 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
                     return
                 }
                 if let data = data {
-                    cell!.recipeImage.image = UIImage(data: data)
+                    cell.recipeImage.image = UIImage(data: data)
                 }
             }
 //            cell.setGeneralCell(imageRef: imageRefID)
             cell.leftGeneralLabel.text = "Skapad av: \nAntal portioner: \nTillagningstid: "
             cell.rightGeneralLabel.text = generalLabelText
             return (cell)
-        } else if (indexPath.row == 1){
+        } else if (indexPath.section == 1){
             let cell = tableView.dequeueReusableCell(withIdentifier: tagsCellID) as! TagsViewCell
             return cell
-        } else {
+        } else if (indexPath.section == 2){
             let cell = tableView.dequeueReusableCell(withIdentifier: ingredientsCellID, for: indexPath) as! RecipeIngredientsTableViewCell
             
             cell.setIngredientCell(ingred: ingredientsArray[indexPath.row], amount: ingredientsAmountArray[indexPath.row])
             return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: howToCellID, for: indexPath) as! HowToCell
+            cell.numberLbl.text = "\(indexPath.row + 1)."
+            cell.howToText.text = theRecipe.howTo[indexPath.row]
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 337
+        } else if indexPath.section == 1 {
+            return 62
+        } else {
+            return 35
         }
     }
     

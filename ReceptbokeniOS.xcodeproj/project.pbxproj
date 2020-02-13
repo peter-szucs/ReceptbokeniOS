@@ -11,6 +11,7 @@
 		5218BEF723F2FBD9009BE1DD /* RecipeIngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218BEF623F2FBD9009BE1DD /* RecipeIngredientsTableViewCell.swift */; };
 		5218BEF923F404ED009BE1DD /* GeneralInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218BEF823F404ED009BE1DD /* GeneralInfoCell.swift */; };
 		5218BEFB23F40911009BE1DD /* TagsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218BEFA23F40911009BE1DD /* TagsViewCell.swift */; };
+		5218BF8623F55E51009BE1DD /* HowToCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218BF8523F55E51009BE1DD /* HowToCell.swift */; };
 		5239E27223E95CC600C5FB05 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239E27123E95CC600C5FB05 /* RecipesViewController.swift */; };
 		5239E2B823E9C1E600C5FB05 /* RecipeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239E2B723E9C1E600C5FB05 /* RecipeListTableViewCell.swift */; };
 		5239E2BA23E9C4CB00C5FB05 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5239E2B923E9C4CB00C5FB05 /* GoogleService-Info.plist */; };
@@ -57,6 +58,7 @@
 		5218BEF623F2FBD9009BE1DD /* RecipeIngredientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientsTableViewCell.swift; sourceTree = "<group>"; };
 		5218BEF823F404ED009BE1DD /* GeneralInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfoCell.swift; sourceTree = "<group>"; };
 		5218BEFA23F40911009BE1DD /* TagsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewCell.swift; sourceTree = "<group>"; };
+		5218BF8523F55E51009BE1DD /* HowToCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToCell.swift; sourceTree = "<group>"; };
 		5239E27123E95CC600C5FB05 /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		5239E2B723E9C1E600C5FB05 /* RecipeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListTableViewCell.swift; sourceTree = "<group>"; };
 		5239E2B923E9C4CB00C5FB05 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				5239E2B723E9C1E600C5FB05 /* RecipeListTableViewCell.swift */,
 				5239E2BD23EC9CCC00C5FB05 /* Recipe.swift */,
 				52D2D48B23EDAB1700069148 /* RecipeContentViewController.swift */,
+				5218BF8523F55E51009BE1DD /* HowToCell.swift */,
 				5218BEF623F2FBD9009BE1DD /* RecipeIngredientsTableViewCell.swift */,
 				5218BEF823F404ED009BE1DD /* GeneralInfoCell.swift */,
 				5218BEFA23F40911009BE1DD /* TagsViewCell.swift */,
@@ -447,6 +450,7 @@
 				52D2D48C23EDAB1700069148 /* RecipeContentViewController.swift in Sources */,
 				52D2D48E23EDB12A00069148 /* DataHandler.swift in Sources */,
 				5218BEF723F2FBD9009BE1DD /* RecipeIngredientsTableViewCell.swift in Sources */,
+				5218BF8623F55E51009BE1DD /* HowToCell.swift in Sources */,
 				5298445823E85D1D0038F93D /* ReceptbokeniOS.xcdatamodeld in Sources */,
 				5239E27223E95CC600C5FB05 /* RecipesViewController.swift in Sources */,
 				5298445223E85D1D0038F93D /* MainViewController.swift in Sources */,
