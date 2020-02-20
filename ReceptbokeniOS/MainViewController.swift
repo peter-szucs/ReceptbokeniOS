@@ -15,6 +15,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     let mainMenuCell = "MainMenuCell"
     let showRecipes = "ShowRecipes"
+    let newRecipe = "NewRecipe"
 //    let storage = Storage.storage()
     
     @IBOutlet weak var tableView: UITableView!
@@ -43,6 +44,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             guard let nextVCTitle = menuItems[indexPath.row].title else {return}
             
             destinationVC.pageTitle = nextVCTitle
+        } else if (segue.identifier == newRecipe) {
+            guard let destinationVC = segue.destination as? NewRecipeViewController else {return}
+            guard let cell = sender as? UITableViewCell else {return}
+            guard let indexPath = tableView.indexPath(for: cell) else {return}
+            guard let nextVCTitle = menuItems[indexPath.row].title else {return}
+            destinationVC.pageTitle = nextVCTitle
         }
     }
     
@@ -59,7 +66,24 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected: \(menuItems[indexPath.row].title!)")
+        switch indexPath.row {
+        case 0:
+            performSegue(withIdentifier: showRecipes, sender: self)
+        case 1:
+            performSegue(withIdentifier: showRecipes, sender: self)
+        case 2:
+            performSegue(withIdentifier: newRecipe, sender: self)
+        case 3:
+            print("Coming Soon")
+//            performSegue(withIdentifier: groceryList, sender: self)
+        case 4:
+            performSegue(withIdentifier: showRecipes, sender: self)
+            
+        default:
+            print("Nothing happened")
+        }
+        
+//        print("Selected: \(menuItems[indexPath.row].title!)")
     }
 
     @IBAction func uploadImage(_ sender: UIButton) {

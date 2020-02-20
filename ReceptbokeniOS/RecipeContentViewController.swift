@@ -14,6 +14,13 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBOutlet weak var table: UITableView!
     
+    var text = [
+        "Ejhaosdofh alsdjfh lajs dflja sdlfkj alsdkjf lakjs dflja sldfj laksdjf lakjs dflakj sdlfjka lsdfjk laskdjf lkasjd flakjs dlfkja sldfkj alsdkjf laskjd flkaj sdlfj alksdj flkasj dflakjs dlfkja sldfj aklsdj flkasjd flkjafkjs dlfjk sadjf lksd jflkas djfa sjdfk alsjfd laj sdlf kdfg.",
+        "ashdfk asdflkja sdlkfjklasdf a sjdlfalskdjf lkajsdl fkasj dlfj alskdj flkasj dflaj sdlfkj aslkdfj laskdjf lasjd flajs dlfkajs dlfkja sldkfj alsdkfj alskdj flksadj fllaksjd flkasjd f"
+    ]
+    
+    
+    
     let generalInfoCellID = "GeneralInfo"
     let tagsCellID = "TagCell"
     let ingredientsCellID = "IngredientsCellID"
@@ -28,14 +35,16 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.shared.isIdleTimerDisabled = true
         print(theRecipe.howTo.count)
 //        db = Firestore.firestore()
         self.title = theRecipe?.title
-        table.delegate = self
-        table.dataSource = self
+//        table.delegate = self
+//        table.dataSource = self
         table.rowHeight = UITableView.automaticDimension
-        table.estimatedRowHeight = 44.0
+        table.estimatedRowHeight = 300.0
         self.table.reloadData()
+        table.layer.backgroundColor = UIColor.white.cgColor
 //        db?.collection("Recipes")
 //        var generalLabelText: String
         guard let authorTemp = theRecipe?.author else {return}
@@ -129,8 +138,8 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: howToCellID, for: indexPath) as! HowToCell
-            cell.numberLbl.text = "\(indexPath.row + 1)."
-            cell.howToText.text = theRecipe.howTo[indexPath.row]
+//            cell.numberLbl.text = "\(indexPath.row + 1)."
+            cell.howToText.text = "\(theRecipe.howTo[indexPath.row])\n"
             return cell
         }
     }
@@ -140,11 +149,41 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
             return 337
         } else if indexPath.section == 1 {
             return 62
-        } else {
+        } else if indexPath.section == 2{
             return 35
+        } else {
+            return table.rowHeight
         }
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 2:
+            return "Ingridienser"
+        case 3:
+            return "Tillagning"
+        default:
+            return ""
+        }
+    }
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let header = UILabel()
+////        header.textColor = UIColor.black
+////        header.backgroundColor = UIColor.white
+//
+//        header.adjustsFontSizeToFitWidth = true
+////        header.textAlignment = .center
+//        switch section {
+//        case 2:
+//            header.text = "Ingridienser"
+//        case 3:
+//            header.text = "Tillagning"
+//        default:
+//            header.text = ""
+//        }
+//        return header
+//    }
     
 
     /*
