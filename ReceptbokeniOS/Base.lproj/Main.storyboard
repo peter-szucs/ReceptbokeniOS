@@ -416,7 +416,6 @@
                                         <connections>
                                             <outlet property="footerLabel" destination="EeQ-Z8-rzE" id="vSC-64-pQi"/>
                                             <outlet property="mainLabel" destination="LJT-dq-Ytt" id="hRj-Lj-MIc"/>
-                                            <segue destination="srg-oj-lEM" kind="show" identifier="MultiInputCell" id="4Qk-67-pDq"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -441,28 +440,33 @@
                     </navigationItem>
                     <connections>
                         <outlet property="table" destination="ZUn-Dz-dzD" id="cRy-hg-5tH"/>
+                        <segue destination="srg-oj-lEM" kind="show" identifier="AddTagsSeuge" id="kQP-Jr-0zy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ESP-2u-YXk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2015.9420289855075" y="898.66071428571422"/>
+            <point key="canvasLocation" x="2016" y="1268"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Add Tags View Controller-->
         <scene sceneID="mlT-c0-Qts">
             <objects>
-                <tableViewController id="srg-oj-lEM" sceneMemberID="viewController">
+                <tableViewController id="srg-oj-lEM" customClass="AddTagsViewController" customModule="ReceptbokeniOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4mC-fp-mbd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="dbU-OO-8rk">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TagsCellID" id="dbU-OO-8rk">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dbU-OO-8rk" id="5FA-vV-zm6">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -470,11 +474,20 @@
                             <outlet property="delegate" destination="srg-oj-lEM" id="S5n-qc-UOs"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="95v-B0-9cF"/>
+                    <navigationItem key="navigationItem" id="95v-B0-9cF">
+                        <barButtonItem key="rightBarButtonItem" title="Spara" id="Qz7-JU-d3V">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="srg-oj-lEM" id="RHT-1h-z9m"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="table" destination="4mC-fp-mbd" id="dOV-rY-f73"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="avC-M7-Pfy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3043" y="899"/>
+            <point key="canvasLocation" x="3109" y="893"/>
         </scene>
         <!--Recipe Content View Controller-->
         <scene sceneID="9eX-dV-vZI">

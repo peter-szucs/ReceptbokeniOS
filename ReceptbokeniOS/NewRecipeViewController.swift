@@ -22,8 +22,10 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
     let cookTimeInputCell = "CookTimeInputCell"
     let imageCell = "ImageCell"
     let multiSelectionCell = "MultiSelectionCell"
+    let addTagsSegue = "AddTagsSeuge"
+    
     var tagsAdded: [String] = []
-    var ingridientsAdded: [String] = []
+    var ingredientsAdded: [String] = []
     var howToAdded: [String] = []
     
     
@@ -65,21 +67,23 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
         case 5:
             let cell = table.dequeueReusableCell(withIdentifier: multiSelectionCell, for: indexPath) as! MultiInputCell
             cell.mainLabel.text = "Lägg till taggar"
+            cell.footerLabel.text = "\(tagsAdded.count) tillagda taggar"
             return cell
         case 6:
             let cell = table.dequeueReusableCell(withIdentifier: multiSelectionCell, for: indexPath) as! MultiInputCell
             cell.mainLabel.text = "Lägg till ingredienser"
+            cell.footerLabel.text = "\(ingredientsAdded.count) tillagda"
             return cell
         case 7:
             let cell = table.dequeueReusableCell(withIdentifier: multiSelectionCell, for: indexPath) as! MultiInputCell
             cell.mainLabel.text = "Tillagning"
+            cell.footerLabel.text = "\(howToAdded.count) tillagda"
             return cell
         default:
             let cell = table.dequeueReusableCell(withIdentifier: multiSelectionCell, for: indexPath) as! MultiInputCell
             cell.mainLabel.text = "Tillagning"
             return cell
-//            let cell = table.dequeueReusableCell(withIdentifier: singleInputCell, for: indexPath)
-//            return cell
+
         }
     }
     
@@ -101,6 +105,9 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
 //            alert.addAction(cancelAction)
 //            alert.addAction(saveAction)
 //            present(alert, animated: true)
+            
+        case 5:
+            performSegue(withIdentifier: addTagsSegue, sender: self)
         default:
             print("")
         }
@@ -120,15 +127,21 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    
+    func refresh() {
+        table.reloadData()
+    }
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == addTagsSegue {
+            guard let destinationVC = segue.destination as? AddTagsViewController else {return}
+            destinationVC.newRecipeVC = self
+            destinationVC.selectionsArray = tagsAdded
+        }
     }
-    */
+    
 
 }

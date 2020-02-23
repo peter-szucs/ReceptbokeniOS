@@ -12,6 +12,8 @@
 		5202AF5D23FBE00300F99101 /* CookTimeInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5202AF5C23FBE00300F99101 /* CookTimeInputCell.swift */; };
 		5202AF5F23FBE01700F99101 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5202AF5E23FBE01700F99101 /* ImageCell.swift */; };
 		5202AF6123FBE02400F99101 /* MultiInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5202AF6023FBE02400F99101 /* MultiInputCell.swift */; };
+		5202AF8723FEC28500F99101 /* AddTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5202AF8623FEC28500F99101 /* AddTagsViewController.swift */; };
+		5202AF892402BDCE00F99101 /* TagsDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5202AF882402BDCE00F99101 /* TagsDataHandler.swift */; };
 		5218BEF723F2FBD9009BE1DD /* RecipeIngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218BEF623F2FBD9009BE1DD /* RecipeIngredientsTableViewCell.swift */; };
 		5218BEF923F404ED009BE1DD /* GeneralInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218BEF823F404ED009BE1DD /* GeneralInfoCell.swift */; };
 		5218BEFB23F40911009BE1DD /* TagsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218BEFA23F40911009BE1DD /* TagsViewCell.swift */; };
@@ -80,6 +82,8 @@
 		5202AF5C23FBE00300F99101 /* CookTimeInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookTimeInputCell.swift; sourceTree = "<group>"; };
 		5202AF5E23FBE01700F99101 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		5202AF6023FBE02400F99101 /* MultiInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiInputCell.swift; sourceTree = "<group>"; };
+		5202AF8623FEC28500F99101 /* AddTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsViewController.swift; sourceTree = "<group>"; };
+		5202AF882402BDCE00F99101 /* TagsDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsDataHandler.swift; sourceTree = "<group>"; };
 		5218BEF623F2FBD9009BE1DD /* RecipeIngredientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientsTableViewCell.swift; sourceTree = "<group>"; };
 		5218BEF823F404ED009BE1DD /* GeneralInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfoCell.swift; sourceTree = "<group>"; };
 		5218BEFA23F40911009BE1DD /* TagsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewCell.swift; sourceTree = "<group>"; };
@@ -168,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				5239E2B923E9C4CB00C5FB05 /* GoogleService-Info.plist */,
+				5298445623E85D1D0038F93D /* ReceptbokeniOS.xcdatamodeld */,
 				5298444D23E85D1D0038F93D /* AppDelegate.swift */,
 				5298444F23E85D1D0038F93D /* SceneDelegate.swift */,
 				52D2D48D23EDB12A00069148 /* DataHandler.swift */,
@@ -176,7 +181,6 @@
 				5298445923E85D210038F93D /* Assets.xcassets */,
 				5298445B23E85D210038F93D /* LaunchScreen.storyboard */,
 				5298445E23E85D210038F93D /* Info.plist */,
-				5298445623E85D1D0038F93D /* ReceptbokeniOS.xcdatamodeld */,
 				5298448023E860CD0038F93D /* MenuItems.swift */,
 				5298448223E861240038F93D /* MainMenuCell.swift */,
 				5239E27123E95CC600C5FB05 /* RecipesViewController.swift */,
@@ -192,6 +196,8 @@
 				5202AF5C23FBE00300F99101 /* CookTimeInputCell.swift */,
 				5202AF5E23FBE01700F99101 /* ImageCell.swift */,
 				5202AF6023FBE02400F99101 /* MultiInputCell.swift */,
+				5202AF8623FEC28500F99101 /* AddTagsViewController.swift */,
+				5202AF882402BDCE00F99101 /* TagsDataHandler.swift */,
 			);
 			path = ReceptbokeniOS;
 			sourceTree = "<group>";
@@ -495,7 +501,9 @@
 				5239E2BE23EC9CCC00C5FB05 /* Recipe.swift in Sources */,
 				5298448323E861240038F93D /* MainMenuCell.swift in Sources */,
 				5239E2B823E9C1E600C5FB05 /* RecipeListTableViewCell.swift in Sources */,
+				5202AF8723FEC28500F99101 /* AddTagsViewController.swift in Sources */,
 				5218BEF923F404ED009BE1DD /* GeneralInfoCell.swift in Sources */,
+				5202AF892402BDCE00F99101 /* TagsDataHandler.swift in Sources */,
 				5202AF6123FBE02400F99101 /* MultiInputCell.swift in Sources */,
 				5218BEFB23F40911009BE1DD /* TagsViewCell.swift in Sources */,
 			);
