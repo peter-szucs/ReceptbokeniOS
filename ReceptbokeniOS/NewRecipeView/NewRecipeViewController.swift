@@ -16,6 +16,7 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
     var imageTemp: UIImage?
     
     var pageTitle: String = ""
+    var newRecipe: Recipe?
     var newRecipeArray: [String : Any?] = [:]
     
     let singleInputCell = "SingleInputCell"
@@ -23,9 +24,13 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
     let imageCell = "ImageCell"
     let multiSelectionCell = "MultiSelectionCell"
     let addTagsSegue = "AddTagsSeuge"
+    let addIngredientsSegue = "AddIngredientsSegue"
+    let addHowToSegue = "AddHowToSegue"
     
     var tagsAdded: [String] = []
     var ingredientsAdded: [String] = []
+    var ingredientsAmountAdded: [Float] = []
+    var ingredientsTypeAdded: [Int] = []
     var howToAdded: [String] = []
     
     
@@ -36,6 +41,8 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
         imagePicker.delegate = self
         
     }
+    
+    // MARK: - TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 8
@@ -108,6 +115,10 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
             
         case 5:
             performSegue(withIdentifier: addTagsSegue, sender: self)
+        case 6:
+            performSegue(withIdentifier: addIngredientsSegue, sender: self)
+        case 7:
+            performSegue(withIdentifier: addHowToSegue, sender: self)
         default:
             print("")
         }
@@ -116,8 +127,6 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-//            imageView.contentMode = .scaleAspectFit
-//            imageView.image = pickedImage
             self.imageTemp = pickedImage
         }
 
@@ -139,7 +148,17 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
         if segue.identifier == addTagsSegue {
             guard let destinationVC = segue.destination as? AddTagsViewController else {return}
             destinationVC.newRecipeVC = self
-            destinationVC.selectionsArray = tagsAdded
+            destinationVC.selectionsArray = tagsAdded 
+        } else if segue.identifier == addIngredientsSegue {
+            guard let destinationVC = segue.destination as? AddIngredientsViewController else {return}
+            destinationVC.newRecipeVC = self
+            destinationVC.ingredientsAdded = ingredientsAdded
+            destinationVC.ingredientsAmountAdded = ingredientsAmountAdded
+            destinationVC.ingredientsTypeAdded = ingredientsTypeAdded
+        } else if segue.identifier == addHowToSegue {
+            guard let destinationVC = segue.destination as? AddHowToViewController else {return}
+            destinationVC.newRecipeVC = self
+            destinationVC.howToAdded = howToAdded
         }
     }
     

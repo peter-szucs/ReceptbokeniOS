@@ -168,7 +168,7 @@ class AddTagsViewController: UITableViewController {
         for selectedTag in selectionsArray {
             if (selectedTag == stringA) {
                 isEqual = true
-                break
+//                break
             }
         }
         return isEqual

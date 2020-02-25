@@ -37,6 +37,9 @@
 		5298448323E861240038F93D /* MainMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5298448223E861240038F93D /* MainMenuCell.swift */; };
 		52D2D48C23EDAB1700069148 /* RecipeContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D2D48B23EDAB1700069148 /* RecipeContentViewController.swift */; };
 		52D2D48E23EDB12A00069148 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D2D48D23EDB12A00069148 /* DataHandler.swift */; };
+		52FEA0722403E43100C5607A /* AddIngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEA0712403E43100C5607A /* AddIngredientsViewController.swift */; };
+		52FEA0742403EB4D00C5607A /* AddedIngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEA0732403EB4D00C5607A /* AddedIngredientsTableViewCell.swift */; };
+		52FEA07824053F7E00C5607A /* AddHowToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEA07724053F7E00C5607A /* AddHowToViewController.swift */; };
 		7637BED7F2E7DD2A8EAA673B /* Pods_ReceptbokeniOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DED5815EEFB484146039F04 /* Pods_ReceptbokeniOSTests.framework */; };
 		AE5224992868ACF8DA040886 /* Pods_ReceptbokeniOS_ReceptbokeniOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C61645E0D569AB9D99BE513D /* Pods_ReceptbokeniOS_ReceptbokeniOSUITests.framework */; };
 /* End PBXBuildFile section */
@@ -111,6 +114,9 @@
 		5298448223E861240038F93D /* MainMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCell.swift; sourceTree = "<group>"; };
 		52D2D48B23EDAB1700069148 /* RecipeContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeContentViewController.swift; sourceTree = "<group>"; };
 		52D2D48D23EDB12A00069148 /* DataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
+		52FEA0712403E43100C5607A /* AddIngredientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientsViewController.swift; sourceTree = "<group>"; };
+		52FEA0732403EB4D00C5607A /* AddedIngredientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedIngredientsTableViewCell.swift; sourceTree = "<group>"; };
+		52FEA07724053F7E00C5607A /* AddHowToViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHowToViewController.swift; sourceTree = "<group>"; };
 		9EF3761F81E83EBA0AA7EC3A /* Pods_ReceptbokeniOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReceptbokeniOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B74A813811C4EE81D2D0467F /* Pods-ReceptbokeniOS-ReceptbokeniOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReceptbokeniOS-ReceptbokeniOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-ReceptbokeniOS-ReceptbokeniOSUITests/Pods-ReceptbokeniOS-ReceptbokeniOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C61645E0D569AB9D99BE513D /* Pods_ReceptbokeniOS_ReceptbokeniOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReceptbokeniOS_ReceptbokeniOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,6 +152,63 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5202AF8A2403DF7100F99101 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				5298445123E85D1D0038F93D /* MainViewController.swift */,
+				5298448023E860CD0038F93D /* MenuItems.swift */,
+				5298448223E861240038F93D /* MainMenuCell.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		5202AF8B2403DF9500F99101 /* RecipeView */ = {
+			isa = PBXGroup;
+			children = (
+				5239E27123E95CC600C5FB05 /* RecipesViewController.swift */,
+				5239E2B723E9C1E600C5FB05 /* RecipeListTableViewCell.swift */,
+			);
+			path = RecipeView;
+			sourceTree = "<group>";
+		};
+		5202AF8C2403DFB900F99101 /* RecipeContentView */ = {
+			isa = PBXGroup;
+			children = (
+				52D2D48B23EDAB1700069148 /* RecipeContentViewController.swift */,
+				5218BF8523F55E51009BE1DD /* HowToCell.swift */,
+				5218BEF623F2FBD9009BE1DD /* RecipeIngredientsTableViewCell.swift */,
+				5218BEF823F404ED009BE1DD /* GeneralInfoCell.swift */,
+				5218BEFA23F40911009BE1DD /* TagsViewCell.swift */,
+			);
+			path = RecipeContentView;
+			sourceTree = "<group>";
+		};
+		5202AF8D2403DFDC00F99101 /* NewRecipeView */ = {
+			isa = PBXGroup;
+			children = (
+				5202AF5823FBCFFB00F99101 /* NewRecipeViewController.swift */,
+				5202AF5A23FBDFEC00F99101 /* SingleInputCell.swift */,
+				5202AF5C23FBE00300F99101 /* CookTimeInputCell.swift */,
+				5202AF5E23FBE01700F99101 /* ImageCell.swift */,
+				5202AF6023FBE02400F99101 /* MultiInputCell.swift */,
+				5202AF8623FEC28500F99101 /* AddTagsViewController.swift */,
+				52FEA0712403E43100C5607A /* AddIngredientsViewController.swift */,
+				52FEA0732403EB4D00C5607A /* AddedIngredientsTableViewCell.swift */,
+				52FEA07724053F7E00C5607A /* AddHowToViewController.swift */,
+			);
+			path = NewRecipeView;
+			sourceTree = "<group>";
+		};
+		5202AF8E2403DFF700F99101 /* DataHandlers */ = {
+			isa = PBXGroup;
+			children = (
+				52D2D48D23EDB12A00069148 /* DataHandler.swift */,
+				5239E2BD23EC9CCC00C5FB05 /* Recipe.swift */,
+				5202AF882402BDCE00F99101 /* TagsDataHandler.swift */,
+			);
+			path = DataHandlers;
+			sourceTree = "<group>";
+		};
 		5298444123E85D1D0038F93D = {
 			isa = PBXGroup;
 			children = (
@@ -171,33 +234,19 @@
 		5298444C23E85D1D0038F93D /* ReceptbokeniOS */ = {
 			isa = PBXGroup;
 			children = (
+				5202AF8E2403DFF700F99101 /* DataHandlers */,
+				5202AF8A2403DF7100F99101 /* MainView */,
+				5202AF8D2403DFDC00F99101 /* NewRecipeView */,
+				5202AF8C2403DFB900F99101 /* RecipeContentView */,
+				5202AF8B2403DF9500F99101 /* RecipeView */,
 				5239E2B923E9C4CB00C5FB05 /* GoogleService-Info.plist */,
 				5298445623E85D1D0038F93D /* ReceptbokeniOS.xcdatamodeld */,
 				5298444D23E85D1D0038F93D /* AppDelegate.swift */,
 				5298444F23E85D1D0038F93D /* SceneDelegate.swift */,
-				52D2D48D23EDB12A00069148 /* DataHandler.swift */,
-				5298445123E85D1D0038F93D /* MainViewController.swift */,
 				5298445323E85D1D0038F93D /* Main.storyboard */,
 				5298445923E85D210038F93D /* Assets.xcassets */,
 				5298445B23E85D210038F93D /* LaunchScreen.storyboard */,
 				5298445E23E85D210038F93D /* Info.plist */,
-				5298448023E860CD0038F93D /* MenuItems.swift */,
-				5298448223E861240038F93D /* MainMenuCell.swift */,
-				5239E27123E95CC600C5FB05 /* RecipesViewController.swift */,
-				5239E2B723E9C1E600C5FB05 /* RecipeListTableViewCell.swift */,
-				5239E2BD23EC9CCC00C5FB05 /* Recipe.swift */,
-				52D2D48B23EDAB1700069148 /* RecipeContentViewController.swift */,
-				5218BF8523F55E51009BE1DD /* HowToCell.swift */,
-				5218BEF623F2FBD9009BE1DD /* RecipeIngredientsTableViewCell.swift */,
-				5218BEF823F404ED009BE1DD /* GeneralInfoCell.swift */,
-				5218BEFA23F40911009BE1DD /* TagsViewCell.swift */,
-				5202AF5823FBCFFB00F99101 /* NewRecipeViewController.swift */,
-				5202AF5A23FBDFEC00F99101 /* SingleInputCell.swift */,
-				5202AF5C23FBE00300F99101 /* CookTimeInputCell.swift */,
-				5202AF5E23FBE01700F99101 /* ImageCell.swift */,
-				5202AF6023FBE02400F99101 /* MultiInputCell.swift */,
-				5202AF8623FEC28500F99101 /* AddTagsViewController.swift */,
-				5202AF882402BDCE00F99101 /* TagsDataHandler.swift */,
 			);
 			path = ReceptbokeniOS;
 			sourceTree = "<group>";
@@ -498,10 +547,13 @@
 				5298444E23E85D1D0038F93D /* AppDelegate.swift in Sources */,
 				5202AF5923FBCFFB00F99101 /* NewRecipeViewController.swift in Sources */,
 				5298445023E85D1D0038F93D /* SceneDelegate.swift in Sources */,
+				52FEA07824053F7E00C5607A /* AddHowToViewController.swift in Sources */,
 				5239E2BE23EC9CCC00C5FB05 /* Recipe.swift in Sources */,
+				52FEA0742403EB4D00C5607A /* AddedIngredientsTableViewCell.swift in Sources */,
 				5298448323E861240038F93D /* MainMenuCell.swift in Sources */,
 				5239E2B823E9C1E600C5FB05 /* RecipeListTableViewCell.swift in Sources */,
 				5202AF8723FEC28500F99101 /* AddTagsViewController.swift in Sources */,
+				52FEA0722403E43100C5607A /* AddIngredientsViewController.swift in Sources */,
 				5218BEF923F404ED009BE1DD /* GeneralInfoCell.swift in Sources */,
 				5202AF892402BDCE00F99101 /* TagsDataHandler.swift in Sources */,
 				5202AF6123FBE02400F99101 /* MultiInputCell.swift in Sources */,
