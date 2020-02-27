@@ -68,7 +68,15 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
                 print(error)
                 return
             }
-            recipeIDFavoritesArray = document?["favorites"] as! [String]
+            if let document = document, document.exists {
+                recipeIDFavoritesArray = document["favorites"] as! [String]
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data recipesviewcontroller: \(dataDescription)")
+            } else {
+                print("Document does not exist")
+            }
+                
+            
             
             let recipesRef = self.db.collection("Recipes")
             
@@ -86,11 +94,11 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
                     let id = document.documentID
                     recipeIDArray.append(id)
                     if recipeIDFavoritesArray.contains(id) {
-                        let item = Recipe(snapshot: document, isFavorite: true)
+                        let item = Recipe(snapshot: document, isFavorite: true, recipeID:  id)
                         self.recipesArray.append(item)
                         self.favArray.append(item)
                     } else {
-                        let item = Recipe(snapshot: document)
+                        let item = Recipe(snapshot: document, recipeID: id)
                         self.recipesArray.append(item)
                     }
                 }

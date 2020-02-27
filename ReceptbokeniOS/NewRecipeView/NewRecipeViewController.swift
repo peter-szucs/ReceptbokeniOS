@@ -39,6 +39,7 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
     var howToAdded: [String] = []
     var timeStringAdded: String = ""
     
+    var randomRecipeID: String = ""
     
 
     override func viewDidLoad() {
@@ -166,8 +167,12 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
             destinationVC.howToAdded = howToAdded
         } else if segue.identifier == newRecipeSavedSegue {
             guard let destinationVC = segue.destination as? RecipeContentViewController else {return}
+            newRecipe?.recipeIDString = randomRecipeID
             let nextVCRecipe = newRecipe
-            
+            let backItem = UIBarButtonItem()
+            backItem.title = " "
+            navigationItem.backBarButtonItem = backItem
+            destinationVC.comingFromNewRecipe = true
             destinationVC.theRecipe = nextVCRecipe
         }
     }

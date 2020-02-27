@@ -13,6 +13,7 @@ import UIKit
 class Recipe {
     
     let ingredientAmountType: [String] = ["st", "tsk", "krm", "msk", "ml", "cl", "dl", "l", "mg", "g", "hg", "kg"]
+    var recipeIDString: String = ""
     
     var title: String
     var isFavorite: Bool
@@ -27,7 +28,7 @@ class Recipe {
     var howTo: [String]
     
     
-    init(title: String, isFavorite: Bool = false, imageID: String, author: String, portions: Int, time: String, tags: [String], ingredients: [String], ingredAmount: [Int], ingredType: [Int], howTo: [String]) {
+    init(title: String, isFavorite: Bool = false, imageID: String, author: String, portions: Int, time: String, tags: [String], ingredients: [String], ingredAmount: [Int], ingredType: [Int], howTo: [String], recipeID: String = "") {
         self.title = title
         self.isFavorite = isFavorite
         self.imageID = imageID
@@ -39,11 +40,12 @@ class Recipe {
         self.ingredAmount = ingredAmount
         self.ingredType = ingredType
         self.howTo = howTo
+        self.recipeIDString = recipeID
     }
     
     
     // TODO: kolla implementera nil init på denna för felhantering
-    init(snapshot: QueryDocumentSnapshot, isFavorite: Bool = false) {
+    init(snapshot: QueryDocumentSnapshot, isFavorite: Bool = false, recipeID: String = "") {
         let snapshotValue = snapshot.data() as [String : Any]
         self.title = snapshotValue["title"] as! String
         self.isFavorite = isFavorite
@@ -56,9 +58,7 @@ class Recipe {
         self.ingredAmount = snapshotValue["ingredAmount"] as! [Int]
         self.ingredType = snapshotValue["ingredType"] as! [Int]
         self.howTo = snapshotValue["howTo"] as! [String]
-//        } else {
-//            return nil
-//        }
+        self.recipeIDString = recipeID
     }
     
     func switchFavorite() {
@@ -67,7 +67,6 @@ class Recipe {
     
     func toDictionary() -> [String: Any] {
         return ["title": title,
-                "isFavorite": isFavorite,
                 "imageID": imageID,
                 "author": author,
                 "portions": portions,

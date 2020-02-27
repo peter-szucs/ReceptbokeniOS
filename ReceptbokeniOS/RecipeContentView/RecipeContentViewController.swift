@@ -8,17 +8,12 @@
 
 import UIKit
 import Firebase
-import FirebaseStorage
 
 class RecipeContentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var table: UITableView!
     
-    var text = [
-        "Ejhaosdofh alsdjfh lajs dflja sdlfkj alsdkjf lakjs dflja sldfj laksdjf lakjs dflakj sdlfjka lsdfjk laskdjf lkasjd flakjs dlfkja sldfkj alsdkjf laskjd flkaj sdlfj alksdj flkasj dflakjs dlfkja sldfj aklsdj flkasjd flkjafkjs dlfjk sadjf lksd jflkas djfa sjdfk alsjfd laj sdlf kdfg.",
-        "ashdfk asdflkja sdlkfjklasdf a sjdlfalskdjf lkajsdl fkasj dlfj alskdj flkasj dflaj sdlfkj aslkdfj laskdjf lasjd flajs dlfkajs dlfkja sldkfj alsdkfj alskdj flksadj fllaksjd flkasjd f"
-    ]
-    
+    @IBOutlet weak var favoritesButton: UIButton!
     
     
     let generalInfoCellID = "GeneralInfo"
@@ -29,24 +24,28 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
     var ingredientsAmountArray: [String] = []
     var generalLabelText: String = ""
     var imageRefID: String = ""
+    var recipeIDFavoritesArray: [String] = []
     
+    var db: Firestore!
     var theRecipe: Recipe!
-//    var db: Firestore?
+    
+    var comingFromNewRecipe: Bool = false
+    
+    var auth: Auth!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         UIApplication.shared.isIdleTimerDisabled = true
-        print(theRecipe.howTo.count)
-//        db = Firestore.firestore()
+        db = Firestore.firestore()
+        auth = Auth.auth()
         self.title = theRecipe?.title
-//        table.delegate = self
-//        table.dataSource = self
+        table.delegate = self
+        table.dataSource = self
         table.rowHeight = UITableView.automaticDimension
         table.estimatedRowHeight = 300.0
         self.table.reloadData()
         table.layer.backgroundColor = UIColor.white.cgColor
-//        db?.collection("Recipes")
-//        var generalLabelText: String
         guard let authorTemp = theRecipe?.author else {return}
         guard let portionsTemp = theRecipe?.portions else {return}
         guard let timeTemp = theRecipe?.time else {return}
@@ -67,19 +66,10 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
         
         guard let imageRefIDo = theRecipe?.imageID else {return}
         imageRefID = imageRefIDo
-        print(imageRefID)
-//        let storageRef = Storage.storage().reference(withPath: "images/\(imageRefID)")
-//        storageRef.getData(maxSize: 4 * 1024 * 1024) { [weak self]  (data, error) in
-//            if let error = error {
-//                print("Error downloading picture: \(error.localizedDescription)")
-//                return
-//            }
-//            if let data = data {
-//                self?.imageRef.image = UIImage(data: data)
-//            }
-//        }
-        
+        changeFavoritedBackground()
+        print("Fav: \(theRecipe.isFavorite)")
     }
+    
     func makeGeneralLabelText(author: String, portions: Int, time: String) -> String {
         var tempReturn: String = ""
         let newLine = "\n"
@@ -96,8 +86,7 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        guard let cellAmount = theRecipe?.ingredients.count else { return 0 }
-//        let cellAmount = theRecipe.ingredients.count
+
         if (section == 0) {
             return 1
         } else if section == 1 {
@@ -107,15 +96,12 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
         } else {
             return theRecipe.howTo.count
         }
-//        let number = theRecipe.ingredients.count + 2
-//        return number
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: generalInfoCellID) as! GeneralInfoCell
             let imageRefID = theRecipe.imageID
-            //        print(imageRefID)
                 let storageRef = Storage.storage().reference(withPath: "images/\(imageRefID)")
                 storageRef.getData(maxSize: 4 * 1024 * 1024) { [weak self]  (data, error) in
                 if let error = error {
@@ -126,7 +112,6 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
                     cell.recipeImage.image = UIImage(data: data)
                 }
             }
-//            cell.setGeneralCell(imageRef: imageRefID)
             cell.leftGeneralLabel.text = "Skapad av: \nAntal portioner: \nTillagningstid: "
             cell.rightGeneralLabel.text = generalLabelText
             return (cell)
@@ -171,33 +156,90 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let header = UILabel()
-////        header.textColor = UIColor.black
-////        header.backgroundColor = UIColor.white
-//
-//        header.adjustsFontSizeToFitWidth = true
-////        header.textAlignment = .center
-//        switch section {
-//        case 2:
-//            header.text = "Ingridienser"
-//        case 3:
-//            header.text = "Tillagning"
-//        default:
-//            header.text = ""
-//        }
-//        return header
-//    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setFavorite() {
+        guard let user = auth.currentUser else {return}
+        let uid = user.uid
+        if theRecipe.isFavorite {
+            var tempArray: [String] = []
+            theRecipe.isFavorite = false
+            
+            let favoritesRef = self.db.collection("users").document(uid)
+            favoritesRef.getDocument { (document, error) in
+//                if let error = error {
+//                    print(error)
+//                    return
+//                } else {
+                if let document = document, document.exists {
+                    self.recipeIDFavoritesArray = document["favorites"] as! [String]
+                    for i in self.recipeIDFavoritesArray {
+                        if (i == self.theRecipe.recipeIDString) {
+                            print("Not adding this")
+                        } else {
+                            tempArray.append(i)
+                        }
+                    }
+                    self.db.collection("users").document(uid).setData([ "favorites" : tempArray ])
+                }
+//                }
+            }
+            // image transform och ta bort ref i DB
+            changeFavoritedBackground()
+//            for i in self.recipeIDFavoritesArray {
+//                if (i == theRecipe.recipeIDString) {
+//                    print("Not adding this")
+//                }
+//                tempArray.append(i)
+//            }
+//            db.collection("users").document(uid).setData([ "favorites" : tempArray ])
+            
+        } else {
+            theRecipe.isFavorite = true
+            let dbRef = self.db.collection("users").document(uid)
+            dbRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    self.recipeIDFavoritesArray = document["favorites"] as! [String]
+                    var tempArray: [String] = []
+                    for i in self.recipeIDFavoritesArray {
+                        tempArray.append(i)
+                    }
+                    tempArray.append(self.theRecipe.recipeIDString)
+                    dbRef.setData([ "favorites": tempArray ])
+                    self.changeFavoritedBackground()
+                } else {
+                    print("Document does not exist, creating new")
+                    self.db.collection("users").document(uid).setData( ["favorites" : [self.theRecipe.recipeIDString] ])
+                }
+            }
+//            let favoritesRef = db.collection("users").document(uid)
+//            favoritesRef.getDocument { (document, error) in
+//                if let error = error {
+//                    print(error)
+//                    return
+//                }
+//                self.recipeIDFavoritesArray = document?["favorites"] as! [String]
+//            }
+//            var tempArray: [String] = []
+//            for i in recipeIDFavoritesArray {
+//                tempArray.append(i)
+//            }
+//            favoritesRef.setData([ "favorites": tempArray ])
+//            changeFavoritedBackground()
+        }
     }
-    */
-
+    
+    func changeFavoritedBackground() {
+        if theRecipe.isFavorite {
+            favoritesButton.setImage(#imageLiteral(resourceName: "favorites"), for: .normal)
+        } else {
+            favoritesButton.setImage(#imageLiteral(resourceName: "isFavFalse"), for: .normal)
+        }
+    }
+    
+    @IBAction func favoriteButtonTapped(_ sender: UIButton) {
+        setFavorite()
+    }
+    
+    
 }

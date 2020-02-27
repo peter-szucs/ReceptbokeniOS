@@ -14,12 +14,16 @@ class AddIngredientsViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var ingredientInput: UITextField!
     @IBOutlet weak var ingredAmount: UITextField!
     @IBOutlet weak var ingredTypePicker: UIPickerView!
+    @IBOutlet weak var addOrEditLabel: UILabel!
     
     
     var newRecipeVC: NewRecipeViewController?
     var ingredientsAdded: [String] = []
     var ingredientsAmountAdded: [Int] = []
     var ingredientsTypeAdded: [Int] = []
+    
+    var isCurrentlyEditing: Bool = false
+    var isEditingIndex: Int = 0
     
     let ingredientAmountType: [String] = ["st", "tsk", "krm", "msk", "ml", "cl", "dl", "l", "mg", "g", "hg", "kg"]
     
@@ -90,19 +94,67 @@ class AddIngredientsViewController: UIViewController, UITableViewDelegate, UITab
         ingredientInput.becomeFirstResponder()
     }
     
-    // MARK: - Add ingredient to list
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = deleteAction(at: indexPath)
+        let edit = editAction(at: indexPath)
+        return UISwipeActionsConfiguration(actions: [delete, edit])
+    }
+    
+    func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .destructive, title: "Ta bort") { (action, view, completion) in
+            self.ingredientsAdded.remove(at: indexPath.row)
+            self.ingredientsAmountAdded.remove(at: indexPath.row)
+            self.ingredientsTypeAdded.remove(at: indexPath.row)
+            self.table.deleteRows(at: [indexPath], with: .bottom)
+            completion(true)
+        }
+        action.image = #imageLiteral(resourceName: "icons8-trash-can-50")
+        action.backgroundColor = .red
+        
+        return action
+    }
+    
+    func editAction(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "Ändra") { (action, view, completion) in
+            self.ingredientInput.text = self.ingredientsAdded[indexPath.row]
+            self.ingredAmount.text = String(self.ingredientsAmountAdded[indexPath.row])
+            self.ingredTypePicker.selectRow(self.ingredientsTypeAdded[indexPath.row], inComponent: 0, animated: true)
+            self.ingredientTypePicked = self.ingredientsTypeAdded[indexPath.row]
+            self.isEditingIndex = indexPath.row
+            self.isCurrentlyEditing = true
+            self.addOrEditLabel.text = "Ändra"
+            self.ingredientInput.becomeFirstResponder()
+            
+        
+            completion(true)
+        }
+        action.image = #imageLiteral(resourceName: "icons8-edit-50")
+        action.backgroundColor = .blue
+        
+        return action
+    }
+    
+    // MARK: - Add/Edit ingredient to list
     
     @IBAction func addIngredient(_ sender: UIButton) {
         guard let ingredient = ingredientInput.text else {return}
-        if !(compareStrings(compareString: ingredient)) {
-            addIngredient(ingredient: ingredient)
-        } else {
-            doubleIngredientAlert(ingredient: ingredient)
+        if isCurrentlyEditing {
+            addOrEditLabel.text = "Lägg till"
+            isCurrentlyEditing = false
+            addIngredient(ingredient: ingredient, isEditing: true)
             refreshTableView()
+        } else {
+            if !(compareStrings(compareString: ingredient)) {
+                addIngredient(ingredient: ingredient, isEditing: false)
+            } else {
+                doubleIngredientAlert(ingredient: ingredient)
+                refreshTableView()
+            }
         }
-        
 //        refreshTableView()
     }
+    
+    // MARK: - General Functions
     
     func wrongInputAlert() {
         let alert = UIAlertController(title: "Varning", message: "Din mängd kan bara innehålla siffror!", preferredStyle: .alert)
@@ -114,7 +166,7 @@ class AddIngredientsViewController: UIViewController, UITableViewDelegate, UITab
     func doubleIngredientAlert(ingredient: String) {
         let alert = UIAlertController(title: "Lika ingredienser!", message: "Det verkar redan finnas en ingrediens med samma namn. Vill du fortsätta ändå?", preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "Ja", style: .default) { action in
-            self.addIngredient(ingredient: ingredient)
+            self.addIngredient(ingredient: ingredient, isEditing: false)
         }
         let cancelAction = UIAlertAction(title: "Avbryt", style: .cancel)
         alert.addAction(saveAction)
@@ -133,13 +185,20 @@ class AddIngredientsViewController: UIViewController, UITableViewDelegate, UITab
         return isEqual
     }
     
-    func addIngredient(ingredient: String) {
+    func addIngredient(ingredient: String, isEditing: Bool) {
         guard let amount = ingredAmount.text else {return}
         let amountToInt = Int(amount) ?? 0
         if !(amountToInt == 0) {
-            ingredientsAmountAdded.append(amountToInt)
-            ingredientsAdded.append(ingredient)
-            ingredientsTypeAdded.append(ingredientTypePicked)
+            if !isEditing {
+                ingredientsAmountAdded.append(amountToInt)
+                ingredientsAdded.append(ingredient)
+                ingredientsTypeAdded.append(ingredientTypePicked)
+            } else {
+                ingredientsAmountAdded[isEditingIndex] = amountToInt
+                ingredientsAdded[isEditingIndex] = ingredient
+                ingredientsTypeAdded[isEditingIndex] = ingredientTypePicked
+            }
+            
             refreshInputs()
             refreshTableView()
         } else {
@@ -147,6 +206,7 @@ class AddIngredientsViewController: UIViewController, UITableViewDelegate, UITab
             
         }
     }
+    
     
     // MARK: - Save ingredientlist
     

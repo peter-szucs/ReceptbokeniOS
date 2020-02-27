@@ -30,6 +30,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         constructMenuTable()
         let auth = Auth.auth()
+        db = Firestore.firestore()
         guard let user = auth.currentUser else {return}
         auth.signInAnonymously() { (authResult, error) in
             guard let user = authResult?.user else { return }
@@ -41,6 +42,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             } else {
                 print("Login is complete, userID: \(String(describing: uid))")
             }
+//            let dbRef = self.db.collection("users").document(uid)
+//            dbRef.getDocument { (document, error) in
+//                if let document = document, document.exists {
+//                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//                    print("Document data: \(dataDescription)")
+//                } else {
+//                    print("Document does not exist, creating new")
+//                    self.db.collection("users").document(uid).setData( ["favorites" : [String]() ])
+//                }
+//            }
         }
         
         /*
@@ -131,7 +142,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         print("Nothing Happened")
     }
     
+    @IBAction func unwindToVC1(_ sender: UIStoryboardSegue) { }
+    
 }
+
+
 
 // Hide keyboard
 
