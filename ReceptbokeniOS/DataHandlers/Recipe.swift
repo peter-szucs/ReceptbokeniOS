@@ -43,10 +43,10 @@ class Recipe {
     
     
     // TODO: kolla implementera nil init på denna för felhantering
-    init(snapshot: QueryDocumentSnapshot) {
+    init(snapshot: QueryDocumentSnapshot, isFavorite: Bool = false) {
         let snapshotValue = snapshot.data() as [String : Any]
         self.title = snapshotValue["title"] as! String
-        self.isFavorite = snapshotValue["isFavorite"] as! Bool
+        self.isFavorite = isFavorite
         self.imageID = snapshotValue["imageID"] as! String
         self.author = snapshotValue["author"] as! String
         self.portions = snapshotValue["portions"] as! Int

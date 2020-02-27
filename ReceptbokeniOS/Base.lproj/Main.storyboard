@@ -297,8 +297,8 @@
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="..." textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ksK-Cx-T3t">
-                                                    <rect key="frame" x="278.66666666666669" y="5" width="40.333333333333314" height="34.333333333333336"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="..." textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ksK-Cx-T3t">
+                                                    <rect key="frame" x="271" y="5" width="48" height="35"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -310,15 +310,15 @@
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="..." textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="V6L-YE-9Oq">
-                                                    <rect key="frame" x="160.33333333333334" y="5" width="40.333333333333343" height="34.333333333333336"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="..." textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="V6L-YE-9Oq">
+                                                    <rect key="frame" x="155" y="5" width="45" height="35"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oit-42-XzX">
-                                                    <rect key="frame" x="208.66666666666666" y="11.999999999999998" width="47.999999999999972" height="21.333333333333329"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="timme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oit-42-XzX">
+                                                    <rect key="frame" x="208.66666666666663" y="11.999999999999998" width="48" height="21.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -329,7 +329,7 @@
                                                 <constraint firstItem="V6L-YE-9Oq" firstAttribute="top" secondItem="vlE-ni-Ogi" secondAttribute="top" constant="5" id="2Ls-zU-7KP"/>
                                                 <constraint firstItem="1kf-OC-Hgf" firstAttribute="top" secondItem="vlE-ni-Ogi" secondAttribute="topMargin" id="3jR-ve-7zK"/>
                                                 <constraint firstItem="oit-42-XzX" firstAttribute="leading" secondItem="V6L-YE-9Oq" secondAttribute="trailing" constant="8" id="8gm-ac-on4"/>
-                                                <constraint firstItem="V6L-YE-9Oq" firstAttribute="leading" secondItem="1kf-OC-Hgf" secondAttribute="trailing" constant="31" id="A2L-AT-T4S"/>
+                                                <constraint firstItem="V6L-YE-9Oq" firstAttribute="leading" secondItem="1kf-OC-Hgf" secondAttribute="trailing" constant="25.666666666666657" id="A2L-AT-T4S"/>
                                                 <constraint firstItem="ksK-Cx-T3t" firstAttribute="top" secondItem="vlE-ni-Ogi" secondAttribute="top" constant="5" id="IVr-O9-mEM"/>
                                                 <constraint firstAttribute="bottom" secondItem="8n0-rX-Avt" secondAttribute="bottom" constant="10" id="KGI-L4-mR7"/>
                                                 <constraint firstItem="1kf-OC-Hgf" firstAttribute="leading" secondItem="vlE-ni-Ogi" secondAttribute="leading" constant="22.666666666666664" id="PmX-mb-KRE"/>
@@ -341,7 +341,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="V6L-YE-9Oq" secondAttribute="bottom" constant="4" id="h4s-rb-gT5"/>
                                                 <constraint firstAttribute="bottom" secondItem="oit-42-XzX" secondAttribute="bottom" constant="10" id="net-Fe-7zg"/>
                                                 <constraint firstAttribute="trailing" secondItem="8n0-rX-Avt" secondAttribute="trailing" constant="28" id="tPK-dz-TCz"/>
-                                                <constraint firstItem="ksK-Cx-T3t" firstAttribute="leading" secondItem="oit-42-XzX" secondAttribute="trailing" constant="22" id="yuD-yN-Vmg"/>
+                                                <constraint firstItem="ksK-Cx-T3t" firstAttribute="leading" secondItem="oit-42-XzX" secondAttribute="trailing" constant="14" id="yuD-yN-Vmg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -459,7 +459,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ESP-2u-YXk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1680" y="1570"/>
+            <point key="canvasLocation" x="1679.7101449275362" y="1569.6428571428571"/>
         </scene>
         <!--Add Ingredients View Controller-->
         <scene sceneID="2hb-4t-M1X">
@@ -846,6 +846,10 @@
                                     <constraint firstAttribute="height" constant="11" id="1iM-ZD-kDy"/>
                                 </constraints>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ykk-3C-m0W">
+                                <rect key="frame" x="185" y="818" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -909,6 +913,6 @@
         <image name="tablecloth" width="196.66667175292969" height="196.66667175292969"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="h80-7x-B1d"/>
+        <segue reference="p8L-Li-KDa"/>
     </inferredMetricsTieBreakers>
 </document>

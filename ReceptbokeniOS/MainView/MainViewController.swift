@@ -20,11 +20,33 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var tableView: UITableView!
     
+    var auth: Auth!
+    var db: Firestore!
+    
+    var indexToSegue: Int = 0
     var menuItems: [MenuItems] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         constructMenuTable()
+        let auth = Auth.auth()
+        guard let user = auth.currentUser else {return}
+        auth.signInAnonymously() { (authResult, error) in
+            guard let user = authResult?.user else { return }
+//            let isAnonymous = user.isAnonymous  // true
+            let uid = user.uid
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            } else {
+                print("Login is complete, userID: \(String(describing: uid))")
+            }
+        }
+        
+        /*
+        // TODO: - Fixa till så att users läggs till och att en collection med nedanstående läggs till.
+        let itemRef = db.collection("users").document(user.uid).collection("isFavorite")
+        */
         
     }
     
@@ -39,19 +61,21 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showRecipes {
             guard let destinationVC = segue.destination as? RecipesViewController else {return}
-            guard let cell = sender as? UITableViewCell else {return}
-            guard let indexPath = tableView.indexPath(for: cell) else {return}
-            guard let nextVCTitle = menuItems[indexPath.row].title else {return}
+//            guard let cell = sender as? UITableViewCell else {return}
+//            guard let indexPath = tableView.indexPath(for: indexToSegue) else {return}
+            guard let nextVCTitle = menuItems[indexToSegue].title else {return}
             
             destinationVC.pageTitle = nextVCTitle
         } else if (segue.identifier == newRecipe) {
             guard let destinationVC = segue.destination as? NewRecipeViewController else {return}
-            guard let cell = sender as? UITableViewCell else {return}
-            guard let indexPath = tableView.indexPath(for: cell) else {return}
-            guard let nextVCTitle = menuItems[indexPath.row].title else {return}
+//            guard let cell = sender as? UITableViewCell else {return}
+//            guard let indexPath = tableView.indexPath(for: indexToSegue) else {return}
+            guard let nextVCTitle = menuItems[indexToSegue].title else {return}
             destinationVC.pageTitle = nextVCTitle
         }
     }
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuItems.count
@@ -68,22 +92,25 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
+            indexToSegue = indexPath.row
             performSegue(withIdentifier: showRecipes, sender: self)
         case 1:
+            indexToSegue = indexPath.row
             performSegue(withIdentifier: showRecipes, sender: self)
         case 2:
+            indexToSegue = indexPath.row
             performSegue(withIdentifier: newRecipe, sender: self)
         case 3:
+            indexToSegue = indexPath.row
             print("Coming Soon")
 //            performSegue(withIdentifier: groceryList, sender: self)
         case 4:
+            indexToSegue = indexPath.row
             performSegue(withIdentifier: showRecipes, sender: self)
             
         default:
             print("Nothing happened")
         }
-        
-//        print("Selected: \(menuItems[indexPath.row].title!)")
     }
 
     @IBAction func uploadImage(_ sender: UIButton) {

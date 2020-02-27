@@ -208,9 +208,9 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
                 return
             } else {
                 print("Put is complete and i got this back: \(String(describing: downloadMetaData))")
+                completion()
             }
         }
-        completion()
     }
     
     func setRecipe() {
