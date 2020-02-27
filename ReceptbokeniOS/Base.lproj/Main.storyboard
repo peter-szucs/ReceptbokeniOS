@@ -436,13 +436,25 @@
                     </view>
                     <navigationItem key="navigationItem" id="WPX-gH-t20">
                         <barButtonItem key="backBarButtonItem" title="Avbryt" id="kCA-mz-kz1"/>
-                        <barButtonItem key="rightBarButtonItem" title="Spara" id="mM3-J4-0vO"/>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Spara" id="mM3-J4-0vO">
+                                <connections>
+                                    <action selector="saveNewRecipeButton:" destination="o6B-mZ-wZx" id="hPo-HK-g6n"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Felsök" id="oQM-Rp-ubA">
+                                <connections>
+                                    <action selector="debubButton:" destination="o6B-mZ-wZx" id="hrz-6f-tBZ"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="table" destination="ZUn-Dz-dzD" id="cRy-hg-5tH"/>
                         <segue destination="srg-oj-lEM" kind="show" identifier="AddTagsSeuge" id="kQP-Jr-0zy"/>
                         <segue destination="b9i-CU-kZL" kind="show" identifier="AddIngredientsSegue" id="mox-lK-qc5"/>
                         <segue destination="BgO-M8-xNw" kind="show" identifier="AddHowToSegue" id="HkL-jC-XH9"/>
+                        <segue destination="u4S-ro-HLA" kind="show" identifier="NewRecipeSavedSegue" id="p8L-Li-KDa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ESP-2u-YXk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -573,15 +585,13 @@
                                 <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HowToCellID" id="gmq-5m-WVg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HowToCellID" id="gyN-QO-yil">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gmq-5m-WVg" id="Nbd-4n-QNF">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gyN-QO-yil" id="hnS-PZ-sJX">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -594,6 +604,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="light"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M6S-KN-uSO">
@@ -897,4 +908,7 @@
         <image name="plus" catalog="system" width="64" height="56"/>
         <image name="tablecloth" width="196.66667175292969" height="196.66667175292969"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="h80-7x-B1d"/>
+    </inferredMetricsTieBreakers>
 </document>

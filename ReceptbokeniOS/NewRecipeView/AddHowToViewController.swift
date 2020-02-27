@@ -74,7 +74,7 @@ class AddHowToViewController: UIViewController, UITableViewDelegate, UITableView
             completion(true)
         }
         action.image = #imageLiteral(resourceName: "icons8-edit-50")
-        action.backgroundColor = .green
+        action.backgroundColor = .blue
         
         return action
     }
@@ -95,6 +95,7 @@ class AddHowToViewController: UIViewController, UITableViewDelegate, UITableView
         if isCurrentlyEditing {
             howToAdded[isEditingIndex] = inputField.text
             addOrEditLabel.text = "Lägg till"
+            isCurrentlyEditing = false
         } else {
             howToAdded.append(inputField.text)
         }
@@ -109,5 +110,7 @@ class AddHowToViewController: UIViewController, UITableViewDelegate, UITableView
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
+    
+    
 }
 

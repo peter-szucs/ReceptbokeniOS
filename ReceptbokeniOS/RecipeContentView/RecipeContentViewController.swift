@@ -89,6 +89,8 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
         return tempReturn
     }
     
+    // MARK: - TableView
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
@@ -158,6 +160,8 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
+        case 1:
+            return "Taggar"
         case 2:
             return "Ingridienser"
         case 3:

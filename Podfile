@@ -8,6 +8,7 @@ target 'ReceptbokeniOS' do
   # Pods for ReceptbokeniOS
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod 'Firebase/Auth'
 
   target 'ReceptbokeniOSTests' do
     inherit! :search_paths

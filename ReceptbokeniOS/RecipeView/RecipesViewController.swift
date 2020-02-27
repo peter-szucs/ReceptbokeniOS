@@ -30,10 +30,13 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         db = Firestore.firestore()
         table.dataSource = self
         table.delegate = self
+        self.hideKeyboardWhenTappedAround()
         loadData {
             self.table.reloadData()
         }
     }
+    
+    // MARK: - TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipesArray.count
@@ -44,6 +47,8 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.setTableVTwo(title: recipesArray[indexPath.row].title, isFav: recipesArray[indexPath.row].isFavorite, image: recipesArray[indexPath.row].imageID)
         return cell
     }
+    
+    // MARK: - Load data from DB
     
     func loadData(completion: @escaping () -> ()) {
         let recipesRef = db.collection("Recipes")
@@ -68,6 +73,8 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             completion()
         }
     }
+    
+    // MARK: - Segue
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.

@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import Firebase
 
 class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var table: UITableView!
     
+    var db: Firestore!
+    
     let imagePicker = UIImagePickerController()
     var imageTemp: UIImage?
+    var randomImageID: String = ""
     
     var pageTitle: String = ""
     var newRecipe: Recipe?
@@ -26,12 +30,14 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
     let addTagsSegue = "AddTagsSeuge"
     let addIngredientsSegue = "AddIngredientsSegue"
     let addHowToSegue = "AddHowToSegue"
+    let newRecipeSavedSegue = "NewRecipeSavedSegue"
     
     var tagsAdded: [String] = []
     var ingredientsAdded: [String] = []
-    var ingredientsAmountAdded: [Float] = []
+    var ingredientsAmountAdded: [Int] = []
     var ingredientsTypeAdded: [Int] = []
     var howToAdded: [String] = []
+    var timeStringAdded: String = ""
     
     
 
@@ -39,6 +45,9 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         self.title = pageTitle
         imagePicker.delegate = self
+        self.hideKeyboardWhenTappedAround()
+        db = Firestore.firestore()
+        
         
     }
     
@@ -128,6 +137,7 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.imageTemp = pickedImage
+            
         }
 
         dismiss(animated: true, completion: nil)
@@ -136,11 +146,6 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
-    func refresh() {
-        table.reloadData()
-    }
-
     
     // MARK: - Navigation
 
@@ -159,8 +164,144 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
             guard let destinationVC = segue.destination as? AddHowToViewController else {return}
             destinationVC.newRecipeVC = self
             destinationVC.howToAdded = howToAdded
+        } else if segue.identifier == newRecipeSavedSegue {
+            guard let destinationVC = segue.destination as? RecipeContentViewController else {return}
+            let nextVCRecipe = newRecipe
+            
+            destinationVC.theRecipe = nextVCRecipe
         }
     }
     
+    // MARK: - Save Button
+    
+    @IBAction func saveNewRecipeButton(_ sender: UIBarButtonItem) {
+        setRecipe()
+        let dataBaseRef = db.collection("Recipes")
+        
+        if let recipeUploadRef = newRecipe {
+            let randomRecipeID = UUID.init().uuidString
+            dataBaseRef.document(randomRecipeID).setData(recipeUploadRef.toDictionary())
+            uploadPhoto(imageID: randomImageID) {
+                self.performSegue(withIdentifier: self.newRecipeSavedSegue, sender: self)
+            }
+        } else {
+            incompleteRecipeAlert()
+        }
+    }
+    
+    // MARK: - Functions
+    
+    func refresh() {
+        table.reloadData()
+    }
+    
+    func uploadPhoto(imageID: String, completion: @escaping () -> ()) {
+        
+        let uploadRef = Storage.storage().reference(withPath: "images/\(imageID).jpg")
+        guard let imageData = imageTemp?.jpegData(compressionQuality: 0.25) else {return}
+        let uploadMetaData = StorageMetadata.init()
+        uploadMetaData.contentType = "image/jpeg"
 
+        uploadRef.putData(imageData, metadata: uploadMetaData) { (downloadMetaData, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            } else {
+                print("Put is complete and i got this back: \(String(describing: downloadMetaData))")
+            }
+        }
+        completion()
+    }
+    
+    func setRecipe() {
+        var singleInputTempArray: [String] = []
+        for index in 0...2 {
+            let indexPath = IndexPath(row: index, section: 0)
+            let cell: SingleInputCell = table.cellForRow(at: indexPath) as! SingleInputCell
+            if let input = cell.inputField.text {
+                singleInputTempArray.append(input)
+            } else {
+                print("Empty")
+            }
+        }
+        setTimeString()
+        let portionsToInt = Int(singleInputTempArray[1]) ?? 0
+        if portionsToInt == 0 {
+            let alert = UIAlertController(title: "Fel inmatning", message: "Antal portioner verkar vara fel!", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel)
+            alert.addAction(cancelAction)
+            present(alert, animated: true)
+        } else {
+            if !(ingredientsAdded.count == 0 || tagsAdded.count == 0 || howToAdded.count == 0) {
+                randomImageID = UUID.init().uuidString
+                let uploadRecipe = Recipe(title: singleInputTempArray[0], imageID: "\(randomImageID).jpg", author: singleInputTempArray[2], portions: portionsToInt, time: timeStringAdded, tags: tagsAdded, ingredients: ingredientsAdded, ingredAmount: ingredientsAmountAdded, ingredType: ingredientsTypeAdded, howTo: howToAdded)
+                newRecipe = uploadRecipe
+            } else {
+                incompleteRecipeAlert()
+            }
+        }
+        
+    }
+    
+    func setTimeString() {
+        let indexPath = IndexPath(row: 3, section: 0)
+        let cell: CookTimeInputCell = table.cellForRow(at: indexPath) as! CookTimeInputCell
+        guard let hour = cell.hourInput.text else {return}
+        guard let minute = cell.minuteInput.text else {return}
+        let hourToInt = Int(hour) ?? 0
+        let minuteToInt = Int(minute) ?? 0
+        if (hourToInt == 0 && minuteToInt == 0) {
+            let alert = UIAlertController(title: "Varning", message: "Tillagningstiden är ej ifylld, eller fel ifylld.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .cancel)
+            alert.addAction(okAction)
+            present(alert, animated: true)
+        } else {
+            if hourToInt == 0 {
+                timeStringAdded = "\(minuteToInt) min"
+            } else if !(hourToInt == 0) {
+                if minuteToInt == 0 {
+                    timeStringAdded = "\(hourToInt) h"
+                } else if !(minuteToInt == 0) {
+                    timeStringAdded = "\(hourToInt) h \(minuteToInt) min"
+                }
+            }
+        }
+    }
+    
+    // MARK: - Alerts
+    
+    func incompleteRecipeAlert() {
+    let alert = UIAlertController(title: "Varning", message: "Ditt recept verkar ej vara komplett. Kolla igenom så du fyllt i allt!", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .cancel)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
+    
+    @IBAction func debubButton(_ sender: Any) {
+        setRecipe()
+        print(newRecipe?.toDictionary())
+    }
+    
+//    StorageReference childRef2 = [your firebase storage path]
+//    storageRef.child(UserDetails.username+"profilepic.jpg");
+//    Bitmap bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+//    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//    bmp.compress(Bitmap.CompressFormat.JPEG, 25, baos);
+//    byte[] data = baos.toByteArray();
+//    //uploading the image
+//    UploadTask uploadTask2 = childRef2.putBytes(data);
+//    uploadTask2.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//        @Override
+//        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//            Toast.makeText(Profilepic.this, "Upload successful", Toast.LENGTH_LONG).show();
+//        }
+//    }).addOnFailureListener(new OnFailureListener() {
+//        @Override
+//        public void onFailure(@NonNull Exception e) {
+//            Toast.makeText(Profilepic.this, "Upload Failed -> " + e, Toast.LENGTH_LONG).show();
+//        }
+//    });`
+    
+    
+    
 }

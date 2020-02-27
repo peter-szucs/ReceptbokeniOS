@@ -68,7 +68,15 @@ class Recipe {
     func toDictionary() -> [String: Any] {
         return ["title": title,
                 "isFavorite": isFavorite,
-                "imageID": imageID]
+                "imageID": imageID,
+                "author": author,
+                "portions": portions,
+                "time": time,
+                "tags": tags,
+                "ingredients": ingredients,
+                "ingredAmount": ingredAmount,
+                "ingredType": ingredType,
+                "howTo": howTo]
     }
     
 }

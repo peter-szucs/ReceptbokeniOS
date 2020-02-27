@@ -18,7 +18,7 @@ class AddIngredientsViewController: UIViewController, UITableViewDelegate, UITab
     
     var newRecipeVC: NewRecipeViewController?
     var ingredientsAdded: [String] = []
-    var ingredientsAmountAdded: [Float] = []
+    var ingredientsAmountAdded: [Int] = []
     var ingredientsTypeAdded: [Int] = []
     
     let ingredientAmountType: [String] = ["st", "tsk", "krm", "msk", "ml", "cl", "dl", "l", "mg", "g", "hg", "kg"]
@@ -135,7 +135,7 @@ class AddIngredientsViewController: UIViewController, UITableViewDelegate, UITab
     
     func addIngredient(ingredient: String) {
         guard let amount = ingredAmount.text else {return}
-        let amountToInt = Float(amount) ?? 0
+        let amountToInt = Int(amount) ?? 0
         if !(amountToInt == 0) {
             ingredientsAmountAdded.append(amountToInt)
             ingredientsAdded.append(ingredient)
