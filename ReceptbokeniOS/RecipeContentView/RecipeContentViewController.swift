@@ -16,6 +16,8 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var favoritesButton: UIButton!
     
     
+    
+    
     let generalInfoCellID = "GeneralInfo"
     let tagsCellID = "TagCell"
     let ingredientsCellID = "IngredientsCellID"
@@ -25,6 +27,7 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
     var generalLabelText: String = ""
     var imageRefID: String = ""
     var recipeIDFavoritesArray: [String] = []
+    var tagString: String = ""
     
     var db: Firestore!
     var theRecipe: Recipe!
@@ -63,7 +66,7 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
             ingredientsAmountArray.append("\(typeNumber) \(type)")
             
         }
-        
+        makeTagString()
         guard let imageRefIDo = theRecipe?.imageID else {return}
         imageRefID = imageRefIDo
         changeFavoritedBackground()
@@ -77,6 +80,19 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
         tempReturn += String(portions) + newLine
         tempReturn += time
         return tempReturn
+    }
+    
+    func makeTagString() {
+        let separator = ", "
+        var counter = 0
+        for i in theRecipe.tags {
+            tagString += i
+            counter += 1
+            if !(counter == theRecipe.tags.count) {
+                tagString += separator
+            }
+            
+        }
     }
     
     // MARK: - TableView
@@ -117,6 +133,7 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
             return (cell)
         } else if (indexPath.section == 1){
             let cell = tableView.dequeueReusableCell(withIdentifier: tagsCellID) as! TagsViewCell
+            cell.tagsLabel.text = tagString
             return cell
         } else if (indexPath.section == 2){
             let cell = tableView.dequeueReusableCell(withIdentifier: ingredientsCellID, for: indexPath) as! RecipeIngredientsTableViewCell

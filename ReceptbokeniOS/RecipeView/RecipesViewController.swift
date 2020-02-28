@@ -44,15 +44,10 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         // 5
         definesPresentationContext = true
 
-//        guard let user = auth.currentUser else {return}
-//        let uid = user.uid
-//        print(uid)
         table.dataSource = self
         table.delegate = self
         self.hideKeyboardWhenTappedAround()
-//        loadFavorites {
-//            self.table.reloadData()
-//        }
+
         loadData {
             self.table.reloadData()
         }
@@ -192,7 +187,10 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             guard let destinationVC = segue.destination as? RecipeContentViewController else {return}
             guard let cell = sender as? UITableViewCell else {return}
             guard let indexPath = table.indexPath(for: cell) else {return}
-            if filterForFav {
+            if isFiltering {
+                let nextVCRecipe = filteredRecipes[indexPath.row]
+                destinationVC.theRecipe = nextVCRecipe
+            } else if filterForFav {
                 let nextVCRecipe = favArray[indexPath.row]
                 destinationVC.theRecipe = nextVCRecipe
             } else {
