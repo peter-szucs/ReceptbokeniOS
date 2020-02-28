@@ -26,7 +26,7 @@ class RecipeListTableViewCell: UITableViewCell {
 //        }
 //    }
     
-    func setTableVTwo(title: String, isFav: Bool, image: String) {
+    func setTableVTwo(title: String, image: String, isFavorite: Bool) {
         let storageRef = Storage.storage().reference(withPath: "images/\(image)")
         storageRef.getData(maxSize: 4 * 1024 * 1024) { [weak self]  (data, error) in
             if let error = error {
@@ -38,25 +38,11 @@ class RecipeListTableViewCell: UITableViewCell {
             }
         }
         recipeLabel.text = title
-        if isFav {
-            recipeLikeIcon.image = #imageLiteral(resourceName: "isFavTrue")
+        if isFavorite {
+            recipeLikeIcon.image = #imageLiteral(resourceName: "favorites")
         } else {
             recipeLikeIcon.image = #imageLiteral(resourceName: "isFavFalse")
         }
-//        recipeImage.image =
-        
-        //TODO: ändra hur favorites hanteras. Personligt dokument med receptID's som är favorites länkade kanske?
-    }
-    
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
 
+    }
 }

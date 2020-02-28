@@ -10,9 +10,10 @@ import Foundation
 import Firebase
 import UIKit
 
-class Recipe {
+class Recipe: Decodable {
     
     let ingredientAmountType: [String] = ["st", "tsk", "krm", "msk", "ml", "cl", "dl", "l", "mg", "g", "hg", "kg"]
+    var recipeIDString: String = ""
     
     var title: String
     var isFavorite: Bool
@@ -27,7 +28,7 @@ class Recipe {
     var howTo: [String]
     
     
-    init(title: String, isFavorite: Bool = false, imageID: String, author: String, portions: Int, time: String, tags: [String], ingredients: [String], ingredAmount: [Int], ingredType: [Int], howTo: [String]) {
+    init(title: String, isFavorite: Bool = false, imageID: String, author: String, portions: Int, time: String, tags: [String], ingredients: [String], ingredAmount: [Int], ingredType: [Int], howTo: [String], recipeID: String = "") {
         self.title = title
         self.isFavorite = isFavorite
         self.imageID = imageID
@@ -39,14 +40,15 @@ class Recipe {
         self.ingredAmount = ingredAmount
         self.ingredType = ingredType
         self.howTo = howTo
+        self.recipeIDString = recipeID
     }
     
     
     // TODO: kolla implementera nil init på denna för felhantering
-    init(snapshot: QueryDocumentSnapshot) {
+    init(snapshot: QueryDocumentSnapshot, isFavorite: Bool = false, recipeID: String = "") {
         let snapshotValue = snapshot.data() as [String : Any]
         self.title = snapshotValue["title"] as! String
-        self.isFavorite = snapshotValue["isFavorite"] as! Bool
+        self.isFavorite = isFavorite
         self.imageID = snapshotValue["imageID"] as! String
         self.author = snapshotValue["author"] as! String
         self.portions = snapshotValue["portions"] as! Int
@@ -56,9 +58,7 @@ class Recipe {
         self.ingredAmount = snapshotValue["ingredAmount"] as! [Int]
         self.ingredType = snapshotValue["ingredType"] as! [Int]
         self.howTo = snapshotValue["howTo"] as! [String]
-//        } else {
-//            return nil
-//        }
+        self.recipeIDString = recipeID
     }
     
     func switchFavorite() {
@@ -67,8 +67,15 @@ class Recipe {
     
     func toDictionary() -> [String: Any] {
         return ["title": title,
-                "isFavorite": isFavorite,
-                "imageID": imageID]
+                "imageID": imageID,
+                "author": author,
+                "portions": portions,
+                "time": time,
+                "tags": tags,
+                "ingredients": ingredients,
+                "ingredAmount": ingredAmount,
+                "ingredType": ingredType,
+                "howTo": howTo]
     }
     
 }
