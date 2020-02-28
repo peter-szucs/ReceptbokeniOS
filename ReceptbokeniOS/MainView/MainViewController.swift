@@ -62,7 +62,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func constructMenuTable() {
-        menuItems.append(MenuItems(icon: #imageLiteral(resourceName: "recipebook"), title: "Mina sparade recept"))
+        menuItems.append(MenuItems(icon: #imageLiteral(resourceName: "recipebook"), title: "Mina recept"))
         menuItems.append(MenuItems(icon: #imageLiteral(resourceName: "favorites"), title: "Mina favoriter"))
         menuItems.append(MenuItems(icon: #imageLiteral(resourceName: "addNewRecipe"), title: "Skapa nytt recept"))
         menuItems.append(MenuItems(icon: #imageLiteral(resourceName: "cart"), title: "Inköpslista"))
@@ -75,6 +75,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //            guard let cell = sender as? UITableViewCell else {return}
 //            guard let indexPath = tableView.indexPath(for: indexToSegue) else {return}
             guard let nextVCTitle = menuItems[indexToSegue].title else {return}
+            if (indexToSegue == 1) {
+                destinationVC.filterForFav = true
+            }
+            if (indexToSegue == 4) {
+                destinationVC.searchController.becomeFirstResponder()
+            }
             
             destinationVC.pageTitle = nextVCTitle
         } else if (segue.identifier == newRecipe) {
@@ -82,6 +88,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //            guard let cell = sender as? UITableViewCell else {return}
 //            guard let indexPath = tableView.indexPath(for: indexToSegue) else {return}
             guard let nextVCTitle = menuItems[indexToSegue].title else {return}
+            
             destinationVC.pageTitle = nextVCTitle
         }
     }

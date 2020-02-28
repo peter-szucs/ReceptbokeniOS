@@ -282,10 +282,10 @@ class NewRecipeViewController: UIViewController, UITableViewDataSource, UITableV
         present(alert, animated: true)
     }
     
-    @IBAction func debubButton(_ sender: Any) {
-        setRecipe()
-        print(newRecipe?.toDictionary())
-    }
+//    @IBAction func debubButton(_ sender: Any) {
+//        setRecipe()
+//        print(newRecipe?.toDictionary())
+//    }
     
 //    StorageReference childRef2 = [your firebase storage path]
 //    storageRef.child(UserDetails.username+"profilepic.jpg");

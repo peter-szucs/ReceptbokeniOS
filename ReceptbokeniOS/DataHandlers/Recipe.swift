@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import UIKit
 
-class Recipe {
+class Recipe: Decodable {
     
     let ingredientAmountType: [String] = ["st", "tsk", "krm", "msk", "ml", "cl", "dl", "l", "mg", "g", "hg", "kg"]
     var recipeIDString: String = ""

@@ -21,6 +21,10 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     var recipesArray: [Recipe] = []
     var favArray: [Recipe] = []
     
+    var filterForFav = false
+    var filteredRecipes: [Recipe] = []
+    let searchController = UISearchController(searchResultsController: nil)
+    
     let tableListCellID = "RecipeListCellID"
 
     override func viewDidLoad() {
@@ -28,6 +32,18 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         self.title = pageTitle
         db = Firestore.firestore()
         auth = Auth.auth()
+        
+        // 1
+        searchController.searchResultsUpdater = self
+        // 2
+        searchController.obscuresBackgroundDuringPresentation = false
+        // 3
+        searchController.searchBar.placeholder = "Sök Recept"
+        // 4
+        navigationItem.searchController = searchController
+        // 5
+        definesPresentationContext = true
+
 //        guard let user = auth.currentUser else {return}
 //        let uid = user.uid
 //        print(uid)
@@ -42,16 +58,58 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
+    // MARK: - SearchBar
+    
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
+
+    
+    func filterContentForSearchText(_ searchText: String) {
+        if filterForFav {
+            filteredRecipes = favArray.filter { (recipe: Recipe) -> Bool in
+            return recipe.title.lowercased().contains(searchText.lowercased())
+            }
+        } else {
+            filteredRecipes = recipesArray.filter { (recipe: Recipe) -> Bool in
+            return recipe.title.lowercased().contains(searchText.lowercased())
+            }
+        }
+      
+      table.reloadData()
+    }
+    
+
+    
     // MARK: - TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipesArray.count
+        if isFiltering {
+            return filteredRecipes.count
+        } else if filterForFav {
+            return favArray.count
+        } else {
+            return recipesArray.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: tableListCellID, for: indexPath) as! RecipeListTableViewCell
-        cell.setTableVTwo(title: recipesArray[indexPath.row].title, image: recipesArray[indexPath.row].imageID, isFavorite: recipesArray[indexPath.row].isFavorite)
+        let recipe: Recipe
+        if isFiltering {
+            recipe = filteredRecipes[indexPath.row]
+        } else if filterForFav {
+            recipe = favArray[indexPath.row]
             
+        } else {
+            recipe = recipesArray[indexPath.row]
+        }
+        cell.setTableVTwo(title: recipe.title, image: recipe.imageID, isFavorite: recipe.isFavorite)
         return cell
     }
     
@@ -134,12 +192,27 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             guard let destinationVC = segue.destination as? RecipeContentViewController else {return}
             guard let cell = sender as? UITableViewCell else {return}
             guard let indexPath = table.indexPath(for: cell) else {return}
-            let nextVCRecipe = recipesArray[indexPath.row]
+            if filterForFav {
+                let nextVCRecipe = favArray[indexPath.row]
+                destinationVC.theRecipe = nextVCRecipe
+            } else {
+                let nextVCRecipe = recipesArray[indexPath.row]
+                destinationVC.theRecipe = nextVCRecipe
+            }
             
-            destinationVC.theRecipe = nextVCRecipe
+//            destinationVC.theRecipe = nextVCRecipe
 //            destinationVC.pageTitle = nextVCRecipe.title
 //            destinationVC.image = nextVCRecipe.imageID
         }
     }
 
 }
+
+extension RecipesViewController: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    let searchBar = searchController.searchBar
+    filterContentForSearchText(searchBar.text!)
+
+  }
+}
+
