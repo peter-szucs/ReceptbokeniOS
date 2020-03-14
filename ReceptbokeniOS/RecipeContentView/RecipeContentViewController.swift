@@ -22,6 +22,8 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
     let tagsCellID = "TagCell"
     let ingredientsCellID = "IngredientsCellID"
     let howToCellID = "HowToCellID"
+    let chooseGroceriesSegueID = "ChooseGroceriesSegueID"
+    
     var ingredientsArray: [String] = []
     var ingredientsAmountArray: [String] = []
     var generalLabelText: String = ""
@@ -72,6 +74,8 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
         changeFavoritedBackground()
         print("Fav: \(theRecipe.isFavorite)")
     }
+    
+    // MARK: - StringGenerators
     
     func makeGeneralLabelText(author: String, portions: Int, time: String) -> String {
         var tempReturn: String = ""
@@ -173,6 +177,20 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == chooseGroceriesSegueID {
+            guard let destinationVC = segue.destination as? ChooseGroceryViewController else {return}
+            destinationVC.title = "Välj Ingredienser"
+            destinationVC.groceryList = theRecipe.ingredients
+            destinationVC.groceryAmountList = theRecipe.ingredAmount
+            destinationVC.groceryTypeList = theRecipe.ingredType
+        }
+    }
+    
+    // MARK: - Favorites Functions
+    
     func setFavorite() {
         guard let user = auth.currentUser else {return}
         let uid = user.uid
@@ -254,9 +272,15 @@ class RecipeContentViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    // MARK: - Buttons
+    
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         setFavorite()
     }
     
+    @IBAction func groceryListTapped(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: chooseGroceriesSegueID, sender: self)
+        
+    }
     
 }

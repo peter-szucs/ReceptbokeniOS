@@ -69,6 +69,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         menuItems.append(MenuItems(icon: #imageLiteral(resourceName: "search"), title: "Sök recept"))
     }
     
+    // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showRecipes {
             guard let destinationVC = segue.destination as? RecipesViewController else {return}
@@ -93,7 +95,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    
+    // MARK: - TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuItems.count
