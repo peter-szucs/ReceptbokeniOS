@@ -195,6 +195,7 @@
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
+                                <sections/>
                                 <connections>
                                     <outlet property="dataSource" destination="DYz-Np-wzP" id="7aV-1g-ven"/>
                                     <outlet property="delegate" destination="DYz-Np-wzP" id="B1k-NV-b7h"/>
@@ -428,21 +429,21 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SingleInputCell" id="Ny8-ps-le9" customClass="SingleInputCell" customModule="ReceptbokeniOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ny8-ps-le9" id="dgm-ee-Ipm">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="QdT-AD-nWX">
-                                                    <rect key="frame" x="114" y="4" width="292" height="35"/>
+                                                    <rect key="frame" x="114" y="4" width="292" height="34.333333333333336"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titel:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JgG-GJ-ywI">
-                                                    <rect key="frame" x="20" y="11.000000000000002" width="86" height="21.666666666666671"/>
+                                                    <rect key="frame" x="20" y="11" width="86" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="86" id="2sB-sy-YjI"/>
                                                     </constraints>
@@ -469,20 +470,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CookTimeInputCell" id="3t2-kR-CNp" customClass="CookTimeInputCell" customModule="ReceptbokeniOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72.333332061767578" width="414" height="43.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="71.666667938232422" width="414" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3t2-kR-CNp" id="vlE-ni-Ogi">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tillagningstid:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kf-OC-Hgf">
-                                                    <rect key="frame" x="22.666666666666664" y="10.999999999999998" width="114.66666666666669" height="21.333333333333329"/>
+                                                    <rect key="frame" x="22.666666666666664" y="11.000000000000002" width="114.66666666666669" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ksK-Cx-T3t">
-                                                    <rect key="frame" x="271" y="5" width="64" height="34.333333333333336"/>
+                                                    <rect key="frame" x="271" y="5" width="64" height="34.666666666666664"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="64" id="WuC-MF-lxG"/>
@@ -492,7 +493,7 @@
                                                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                                 </textField>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V6L-YE-9Oq">
-                                                    <rect key="frame" x="145" y="5" width="55" height="34.333333333333336"/>
+                                                    <rect key="frame" x="145" y="5" width="55" height="34.666666666666664"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="55" id="fWp-7c-oGO"/>
@@ -502,7 +503,7 @@
                                                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oit-42-XzX">
-                                                    <rect key="frame" x="208" y="11.999999999999998" width="48" height="21.333333333333329"/>
+                                                    <rect key="frame" x="208" y="12.000000000000002" width="48" height="21.666666666666671"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="48" id="92D-6E-zlx"/>
                                                     </constraints>
@@ -511,7 +512,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="minuter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8n0-rX-Avt">
-                                                    <rect key="frame" x="338" y="11.999999999999998" width="59" height="21.333333333333329"/>
+                                                    <rect key="frame" x="338" y="12.000000000000002" width="59" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -545,7 +546,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageCell" rowHeight="92" id="ylz-Te-1gB" customClass="ImageCell" customModule="ReceptbokeniOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="115.66666412353516" width="414" height="92"/>
+                                        <rect key="frame" x="0.0" y="115.33333587646484" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ylz-Te-1gB" id="QTs-7w-sSM">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="92"/>
@@ -583,7 +584,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MultiSelectionCell" textLabel="LJT-dq-Ytt" detailTextLabel="EeQ-Z8-rzE" style="IBUITableViewCellStyleSubtitle" id="5mp-zN-aVL" customClass="MultiInputCell" customModule="ReceptbokeniOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="207.66666412353516" width="414" height="55.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="207.33333587646484" width="414" height="55.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5mp-zN-aVL" id="qMe-UL-y5k">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="55.666667938232422"/>

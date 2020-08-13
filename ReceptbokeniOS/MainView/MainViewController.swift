@@ -31,7 +31,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         constructMenuTable()
         let auth = Auth.auth()
         db = Firestore.firestore()
-        guard let user = auth.currentUser else {return}
+//        guard let user = auth.currentUser else {return}
         auth.signInAnonymously() { (authResult, error) in
             guard let user = authResult?.user else { return }
 //            let isAnonymous = user.isAnonymous  // true
