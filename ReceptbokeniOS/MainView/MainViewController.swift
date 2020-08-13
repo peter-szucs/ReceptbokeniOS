@@ -31,7 +31,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         constructMenuTable()
         let auth = Auth.auth()
         db = Firestore.firestore()
-        guard let user = auth.currentUser else {return}
+//        guard let user = auth.currentUser else {return}
         auth.signInAnonymously() { (authResult, error) in
             guard let user = authResult?.user else { return }
 //            let isAnonymous = user.isAnonymous  // true
@@ -69,6 +69,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         menuItems.append(MenuItems(icon: #imageLiteral(resourceName: "search"), title: "Sök recept"))
     }
     
+    // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showRecipes {
             guard let destinationVC = segue.destination as? RecipesViewController else {return}
@@ -93,7 +95,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    
+    // MARK: - TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuItems.count
