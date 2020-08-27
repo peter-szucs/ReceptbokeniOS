@@ -1,11 +1,11 @@
 # ReceptbokeniOS
 iOS Kurs - ReceptbokApp
 
+![Menu](https://user-images.githubusercontent.com/55179291/91453734-68cdd800-e880-11ea-9ab5-f8b96a65ee1e.png) |
+![ViewRecipe](https://user-images.githubusercontent.com/55179291/91453737-69666e80-e880-11ea-92be-21b5eaec37c7.png) |
+![NewRecipe](https://user-images.githubusercontent.com/55179291/91453735-69666e80-e880-11ea-93c8-c1c6cd8081da.png) |
+![Favorites](https://user-images.githubusercontent.com/55179291/91453729-68354180-e880-11ea-893a-e48fb67e7ec9.png) |
+![Groceries](https://user-images.githubusercontent.com/55179291/91453732-68cdd800-e880-11ea-948d-6d67bf59e8d9.png)
 
-![Favorites](https://user-images.githubusercontent.com/55179291/91424835-9b64da00-e85a-11ea-9969-a2e1835866e1.png) |
-![Groceries](https://user-images.githubusercontent.com/55179291/91424842-9dc73400-e85a-11ea-8b6f-d3e9d924d2ae.png) |
 
-![Menu](https://user-images.githubusercontent.com/55179291/91424844-9dc73400-e85a-11ea-9560-f6f646c17d49.png)| 
-![NewRecipe](https://user-images.githubusercontent.com/55179291/91424846-9e5fca80-e85a-11ea-80b1-07ebb3d893ed.png) |
 
-![Recipe](https://user-images.githubusercontent.com/55179291/91424849-9ef86100-e85a-11ea-923b-e52ace63523f.png) |
